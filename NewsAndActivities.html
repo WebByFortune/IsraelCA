@@ -74,7 +74,7 @@
             } else {
                 events.forEach(event => {
                     let row = table.insertRow();
-                    row.insertCell(0).innerText = event.day;
+                    row.insertCell(0).innerText = event.date;
                     row.insertCell(1).innerText = event.event;
                     row.insertCell(2).innerText = event.venue;
                 });
@@ -99,7 +99,7 @@
         <h2>Upcoming Events</h2>
         <table>
             <tr>
-                <th>Day</th>
+                <th>Date</th>
                 <th>Event</th>
                 <th>Venue</th>
             </tr>
