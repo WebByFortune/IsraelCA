@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { display: flex; align-items: center; padding: 20px; }
+        header img { width: 50px; height: auto; margin-right: 10px; }
+        h1 { margin: 0; }
+        nav { background: green; padding: 10px; text-align: center; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin: 0 15px; }
+        nav ul li a { color: white; text-decoration: none; }
+        .slider-container { position: relative; max-width: 100%; height: 300px; overflow: hidden; }
+        .slider { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        .slide {
+            min-width: 100%;
+            position: relative;
+            text-align: center;
+            height: 100%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-weight: bold;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .slide::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to left, rgba(0, 128, 0, 0.5), rgba(0, 128, 0, 0));
+        }
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+        .dot.active { opacity: 1; }
+        section { padding: 20px; text-align: center; }
+        #about {
+            background: pink; 
+            height: 300px; 
+            margin: 20px; 
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        #about .read-more {
+            display: none;
+        }
+        #about.expanded {
+            height: 600px;
+        }
+        #about.expanded .read-more {
+            display: block;
+        }
+        #about button {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #services, #locations {
+            background: #f4f4f4;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+        }
+        footer { background: green; color: white; text-align: center; padding: 10px; }
+        .slide a.button {
+            background: white;
+            color: green;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            nav ul li { display: block; margin: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="MainLogo.png" alt="Church Logo">
+        <h1>ISRAEL CHURCH OF AFRICA</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="NewsAndActivities.html">News & Activities</a></li>
+            <li><a href="ICAYouth.html">ICA Youth</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about">
+        <h2>ICA YOUTH</h2>
+        <p>More information about ICA Youth goes here...</p>
+        <div class="read-more">
+            <p>More details about ICA Youth...</p>
+        </div>
+        <button onclick="toggleReadMore()">Read More</button>
+    </section>
+    
+    
+    <footer> 
+        <p>Connect with us:</p> 
+        <a href="https://www.facebook.com/profile.php?id=100064541806372">Facebook</a> 
+        <a href="https://www.youtube.com/@labistaphilemon8516">YouTube</a> 
+        <a href="https://wa.me/1234567890">WhatsApp</a> 
+        <a href="mailto:church@example.com">Email</a> 
+        <a href="tel:+1234567890">Phone</a> 
+        <a href="admin.html">Admin Page</a> 
+    </footer>
+    
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+        const dotsContainer = document.querySelector(".dots");
+        
+        slides.forEach((_, index) => {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            dot.addEventListener("click", () => showSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        function showSlide(index) {
+            currentIndex = index;
+            document.querySelector(".slider").style.transform = `translateX(-${index * 100}%)`;
+            document.querySelectorAll(".dot").forEach((dot, i) => {
+                dot.classList.toggle("active", i === index);
+            });
+        }
+        
+        function autoScroll() {
+            showSlide((currentIndex + 1) % slides.length);
+        }
+        setInterval(autoScroll, 3000);
+
+        function toggleReadMore() {
+            document.getElementById("about").classList.toggle("expanded");
+        }
+    </script>
+</body>
+</html>

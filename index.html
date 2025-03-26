@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { display: flex; align-items: center; padding: 20px; }
+        header img { width: 50px; height: auto; margin-right: 10px; }
+        h1 { margin: 0; }
+        nav { background: green; padding: 10px; text-align: center; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin: 0 15px; }
+        nav ul li a { color: white; text-decoration: none; }
+        .slider-container { position: relative; max-width: 100%; height: 300px; overflow: hidden; }
+        .slider { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        .slide {
+            min-width: 100%;
+            position: relative;
+            text-align: center;
+            height: 100%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-weight: bold;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .slide::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to left, rgba(0, 128, 0, 0.5), rgba(0, 128, 0, 0));
+        }
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+        .dot.active { opacity: 1; }
+        section { padding: 20px; text-align: center; }
+        #about {
+            background: pink; 
+            height: auto; 
+            margin: 20px; 
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+         .features {
+                color: #400202;
+                padding: 20px;
+                display: flex;
+            }
+        
+            .features figure{
+                margin: auto;
+                margin-top: 10px;
+                margin-bottom: 200px;
+                text-align: center;
+                width: 200px;
+
+            }
+            .features  figure img {
+                border-radius: 50%;
+                height: 200px;
+                box-shadow: #400202 0 0 5px;
+                width: 200px;
+                transition: .5s;
+            }
+            .features  figure img:hover {
+                border-radius: 100%;
+                box-shadow: #400202 0 0 15px;
+                width: 220px;
+            }
+        #about .read-more {
+            display: none;
+        }
+        #about.expanded {
+            height: 1600px;
+        }
+        #about.expanded .read-more {
+            display: block;
+        }
+        #about button {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #services, #locations {
+            background: #f4f4f4;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+        }
+        footer { background: green; color: white; text-align: left; padding: 10px; }
+        .slide a.button {
+            background: white;
+            color: green;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            nav ul li { display: block; margin: 5px 0; }
+        }
+        }
+
+        /* Major Section */
+        .major-section {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 2px solid #ccc;
+        }
+
+        /* Inner Container */
+        .inner-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Inner Sections */
+        .inner-section {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Responsive: Stack inner sections on smaller screens */
+        @media (max-width: 768px) {
+            .inner-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="MainLogo.png" alt="Church Logo">
+        <h1>ISRAEL CHURCH OF AFRICA</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="NewsAndActivities.html">News & Activities</a></li>
+            <li><a href="ICAYouth.html">ICA Youth</a></li>
+        </ul>
+    </nav>
+    
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="WelcomeToICA.jpg" alt="Choir Competition">
+                <h2>WELCOME TO ICA</h2>
+                <p>Come worship and praise the Lord with us</p>
+            </div>
+            <div class="slide">
+                <img src="churchelders.jpeg" alt="ICA Youth">
+                <h2>ICA</h2>
+                <p>A place of service and worship to God</p>
+            </div>
+            <div class="slide">
+                <img src="Procession.jpeg" alt="Church Activities">
+                <h2>ICA YOUTH</h2>
+                <p>Discover activities for the younger generation</p>
+            </div>
+        </div>
+        <div class="dots"></div>
+    </div>
+    
+    <section id="about">
+        <h2 style="color: red;">MOTTO</h2><p>'God is miracle' Exodus 7:10</p>
+        <h2 style="color: red;">VISION</h2><p>To be the leading indigenious Church with its own identity and reference</p>
+        <h2 style="color: red;">MISSION</h2><p>To be an agent/vessel of God in transforming all Christians in Kenya and beyond by providing good quality services of God in humility, integrity and dignity</p>
+        <h2 style="color: red;">CORE VALUES</h2>
+        <p style="color: green;">Evangelism & Discipleship</p>
+        <p style="color: green;">Fellowship</p>
+        <p style="color: green;">Servanthood</p>
+        <p style="color: green;">Creativity & </p>
+        <p style="color: green;">Integrity</p>
+        <p style="color: green;">Evangelism & Discipleship</p>
+        <h2>Our History</h2>
+        <p style="text-align: left;">Hostory of the Church Routes around Janeno Jackson Filmona Orwa and Jadolo David Zakayo Kivuli. The two had earlier met in Kabete Where they both trained. It is here that Kivuli mentored Janeno in matters religion and evangelism.<br>
+        in 1941, The holy spirit descended on Janeno Jackson Filmona Orwa. He formed Jo Roho Church after leaving CMS.He officially opened the church in Nyahera- a function attended by Jadolo Kivuli. Janeno Filmona was hardworking, polite, patient, kind, obedient, understanding and hospitable.<br>
+        In 1942 Jadolo Kivuli broke away from PAOC/PAG and the two leaders agreed to mearge since they both had common beliefs in baptism by holy spirit, visions, dreams and prophesies<br>
+        The first proposed name for the Church wa Huru salvation, which was not accepted by the government due to the nationwide agitation for independence at the time. They settled for African Israel Church Nineveh.The name Israel was a revelation to J.F. Orwa by the holy spirit that David Kivuli was the vessel for Israel.<br>
+        The Church enjoyed Relative peace and growth under David Kivuli as the High Priest and J.F. Orwa as the Deputy due to their devine and charismatic personalities.<br>
+        The first church constitution was made in 1957.<br>
+        In 1974, David Kivuli passes on. This led to disunity in the church. Later in 1978 the disunity escalated after some church leaders were excommunicated.<br>
+        In 1979, Israel Church of Africa was formed by the excommunicated members led by J.F. Orwa. They agreed to worship as Africa Israel Church Diocese of Nyanza. The church faced threats from the Nineveh headquaters including the closure of the church and unlawful detentions.<br>
+        In 1987 The church was deregistered. The following year (1988) a caretaker committee was constituted to spearhead the formation of Israel Church of Africa under the assistance of Dr. Robert Ouko.<br>
+        In September 15th 1989, Israel Church Of Africa was officially registered. It was agreed that dioceses will be oppened in the administrative provinces.
+
+    </p>
+        <div class="read-more">
+            <p>More details about the church history...</p>
+        </div>
+        <h1>Church Leaders</h1>
+        <section class="features">
+            <figure>
+                <img src="WelcomeToICA.jpg" alt="Bishop">
+                <figcaption>Bishop</figcaption>
+            </figure>
+            <figure>
+                <img src="WelcomeToICA.jpg" alt="Ass.Bishop">
+                <figcaption>Ass. Bishop</figcaption>
+            </figure>
+            <figure>
+                <img src="WelcomeToICA.jpg" alt="Treasurer">
+                <figcaption>Treasurer</figcaption>
+            </figure>
+            <figure>
+                <img src="WelcomeToICA.jpg" alt="Teacher">
+                <figcaption>Teacher</figcaption>
+            </figure>
+            <figure>
+                <img src="WelcomeToICA.jpg" alt="Teacher">
+                <figcaption>Teacher</figcaption>
+            </figure>
+        
+        </section>
+    </section>
+    
+    <section id="services">
+        <h2>Service Times</h2>
+        <p>Friday Service - 7:00 AM</p>
+        <p>Sunday Service - 7:00 PM</p>
+    </section>
+    
+    <section id="locations">    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .info {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+        <h2>Know Your Diocese</h2>
+        <label for="diocese">Select Diocese:</label>
+        <select id="diocese" onchange="updateChurches()">
+            <option value="">-- Select a Diocese --</option>
+            <option value="diocese1">Kisumu Central </option>
+            <option value="diocese2">Kisumu South </option>
+            <option value="diocese3">Kisumu East </option>
+            <option value="diocese4">Kisumu West </option>
+            <option value="diocese5">Upper Milambo </option>
+            <option value="diocese6">Lower Milambo</option>
+            <option value="diocese7">Siaya </option>
+            <option value="diocese8">Rift Valley </option>
+            <option value="diocese9">Nairobi </option>
+            <option value="diocese10">Mombasa </option>
+        </select>
+        <p id="bishopInfo" class="info"></p>
+        
+        <label for="church" style="margin-top: 20px; display: block;">Select Church:</label>
+        <select id="church" onchange="updatePastor()">
+            <option value="">-- Select a Church --</option>
+        </select>
+        <p id="pastorInfo" class="info"></p>
+    </div>
+
+    <script>
+        const dioceses = {
+            diocese1: { bishop: "Bishop Onoka", churches: {"Church A1": "Pastor Paul Adams", "Church B1": "Pastor Steve Clark", "Church C1": "Pastor David Lee"} },
+            diocese2: { bishop: "Bishop Miri", churches: {"Church A2": "Pastor James White", "Church B2": "Pastor Mark Taylor", "Church C2": "Pastor Joseph Hall"} },
+            diocese3: { bishop: "Bishop Magoya", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+            diocese4: { bishop: "Bishop Angugo", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+            diocese5: { bishop: "Bishop Odongo", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+            diocese6: { bishop: "Bishop Ariwi", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+            diocese7: { bishop: "Bishop Alal", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+            diocese8: { bishop: "Bishop Tanui", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+            diocese9: { bishop: "Bishop Jabuya", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+            diocese10: { bishop: "Bishop Twago", churches: {"Church A3": "Pastor Peter Wilson", "Church B3": "Pastor Andrew Scott", "Church C3": "Pastor Matthew Johnson"} },
+        };
+
+        function updateChurches() {
+            let dioceseSelect = document.getElementById("diocese");
+            let churchSelect = document.getElementById("church");
+            let bishopInfo = document.getElementById("bishopInfo");
+            let selectedDiocese = dioceseSelect.value;
+
+            // Clear previous options and info
+            churchSelect.innerHTML = '<option value="">-- Select a Church --</option>';
+            bishopInfo.textContent = "";
+            document.getElementById("pastorInfo").textContent = "";
+
+            if (selectedDiocese && dioceses[selectedDiocese]) {
+                bishopInfo.textContent = "Bishop: " + dioceses[selectedDiocese].bishop;
+                Object.keys(dioceses[selectedDiocese].churches).forEach(church => {
+                    let option = document.createElement("option");
+                    option.value = church;
+                    option.textContent = church;
+                    churchSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updatePastor() {
+            let dioceseSelect = document.getElementById("diocese").value;
+            let churchSelect = document.getElementById("church").value;
+            let pastorInfo = document.getElementById("pastorInfo");
+            
+            if (dioceseSelect && churchSelect && dioceses[dioceseSelect].churches[churchSelect]) {
+                pastorInfo.textContent = "Pastor: " + dioceses[dioceseSelect].churches[churchSelect];
+            } else {
+                pastorInfo.textContent = "";
+            }
+        }
+    </script>
+</body>
+    </section>
+    <section class="major-section">
+    <div class="inner-container">
+    <section class="inner-section" style="margin-right: 20px;">
+         <style>
+        .contact-section {
+            width: 100%;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .contact-left {
+            flex: 1;
+            background:white ;
+            color: green;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 20px;
+        }
+        .contact-right {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-right input, .contact-right textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-right button {
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .contact-right button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <section class="contact-section">
+        <div class="contact-left">CONTACT<br>US</div>
+        <div class="contact-right">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" rows="5" placeholder="Your Message or suggestions" required></textarea>
+            <button onclick="submitForm()">Send Message</button>
+        </div>
+    </section>
+    <script>
+        function submitForm() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+            
+            if (name && email && message) {
+                let mailtoLink = `mailto:israelca@gmail.com?subject=Contact from ${name}&body=Email: ${email}%0D%0A%0D%0A${message}`;
+                window.location.href = mailtoLink;
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+    </script>
+    </section>
+    <section class="inner-section" style="width: 400px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) ; border-radius: 8px; overflow: hidden; margin-left: 30px; margin-top: 20px; margin-bottom: 20PX; ">
+         <style>
+        
+        }
+        .donation-form {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .donation-form input {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .donation-form button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .donation-form button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="donation-form">
+        <h2>Donate via M-Pesa</h2>
+        <input type="text" id="phone" placeholder="Enter your M-Pesa Number" required>
+        <input type="number" id="amount" placeholder="Enter Amount" required>
+        <button onclick="makeDonation()">Donate</button>
+    </div>
+    
+    <script>
+        function makeDonation() {
+            let phone = document.getElementById("phone").value;
+            let amount = document.getElementById("amount").value;
+            let tillNumber = "123456"; // Replace with your actual Till Number
+
+            if (phone && amount) {
+                fetch("https://your-backend-api.com/mpesa/pay", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ phone, amount, tillNumber })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message || "Payment request sent. Check your phone to complete the transaction.");
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Failed to process payment request.");
+                });
+            } else {
+                alert("Please enter your phone number and amount.");
+            }
+        }
+    </script>
+    </section>
+</div>
+</section>
+
+    
+    <footer> 
+        <p>Connect with us:</p> 
+        <a style="color: white;" href="https://www.facebook.com/profile.php?id=100064541806372">Facebook</a><br>
+        <a style="color: white;" href="https://www.youtube.com/@labistaphilemon8516">YouTube</a> <br>
+        <a style="color: white;" href="https://wa.me/1234567890">WhatsApp</a> <br>
+        <a style="color: white;" href="mailto:church@example.com">Email</a> <br>
+        <a style="color: white;" href="tel:+1234567890">Phone</a><br>
+        <a href="admin.html">Admin Page</a>  <br>
+    </footer>
+    
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+        const dotsContainer = document.querySelector(".dots");
+        
+        slides.forEach((_, index) => {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            dot.addEventListener("click", () => showSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        function showSlide(index) {
+            currentIndex = index;
+            document.querySelector(".slider").style.transform = `translateX(-${index * 100}%)`;
+            document.querySelectorAll(".dot").forEach((dot, i) => {
+                dot.classList.toggle("active", i === index);
+            });
+        }
+        
+        function autoScroll() {
+            showSlide((currentIndex + 1) % slides.length);
+        }
+        setInterval(autoScroll, 3000);
+
+        function toggleReadMore() {
+            document.getElementById("about").classList.toggle("expanded");
+        }
+    </script>
+</body>
+</html>
+

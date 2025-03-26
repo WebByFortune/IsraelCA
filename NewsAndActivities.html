@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Activities</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: #f4f4f4;
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { display: flex; align-items: center; padding: 20px; }
+        header img { width: 50px; height: auto; margin-right: 10px; }
+        h1 { margin: 0; }
+        nav { background: green; padding: 10px; text-align: center; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin: 0 15px; }
+        nav ul li a { color: white; text-decoration: none; }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            background: pink;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #ffb6c1;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #ffdce1;
+        }
+        .no-events {
+            font-size: 18px;
+            color: red;
+            margin-top: 20px;
+        }
+        }
+        footer {
+            background: green;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+       <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const table = document.querySelector("table");
+            const events = JSON.parse(localStorage.getItem("events")) || [];
+            
+            if (events.length === 0) {
+                const container = document.querySelector(".container");
+                container.innerHTML += '<p class="no-events">NO FUTURE EVENTS LISTED</p>';
+            } else {
+                events.forEach(event => {
+                    let row = table.insertRow();
+                    row.insertCell(0).innerText = event.day;
+                    row.insertCell(1).innerText = event.event;
+                    row.insertCell(2).innerText = event.venue;
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="MainLogo.png" alt="Church Logo">
+        <h1>ISRAEL CHURCH OF AFRICA</h1>
+    </header>
+    
+   <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="NewsAndActivities.html">News & Activities</a></li>
+            <li><a href="ICAYouth.html">ICA Youth</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Upcoming Events</h2>
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>Event</th>
+                <th>Venue</th>
+            </tr>
+            <!-- Events will be listed here -->
+        </table>
+    </div>
+
+    
+</body>
+ <footer> 
+        <p>Connect with us:</p> 
+        <a href="https://www.facebook.com/profile.php?id=100064541806372">Facebook</a> 
+        <a href="https://www.youtube.com/@labistaphilemon8516">YouTube</a> 
+        <a href="https://wa.me/1234567890">WhatsApp</a> 
+        <a href="mailto:church@example.com">Email</a> 
+        <a href="tel:+1234567890">Phone</a> 
+        <a href="admin.html">Admin Page</a> 
+    </footer>
+</html>

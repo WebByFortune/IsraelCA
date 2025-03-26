@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Events</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: #f4f4f4;
+        }
+        header {
+            background: darkred;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            background: pink;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #ffb6c1;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #ffdce1;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+        button {
+            background: darkred;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        const allowedAdmins = ["Bishop", "Assistant Bishop", "Youth Leader", "Mediapersonell", "Fortune Omondi"];
+        const adminPassword = "ICA2025";
+        
+        function loginAdmin() {
+            let username = prompt("Enter Admin Username:");
+            let password = prompt("Enter Password:");
+            
+            if (!allowedAdmins.includes(username) || password !== adminPassword) {
+                alert("Access Denied");
+                window.location.href = "index.html";
+            }
+        }
+        
+        function loadEvents() {
+            let events = JSON.parse(localStorage.getItem("events")) || [];
+            let table = document.getElementById("eventsTable");
+            
+            events.forEach(event => {
+                let row = table.insertRow();
+                row.insertCell(0).innerText = event.date;
+                row.insertCell(1).innerText = event.event;
+                row.insertCell(2).innerText = event.venue;
+                let deleteCell = row.insertCell(3);
+                deleteCell.innerHTML = '<button onclick="deleteRow(this, \'' + event.event + '\')">Delete</button>';
+            });
+        }
+
+        function addEvent() {
+            let day = document.getElementById("day").value;
+            let month = document.getElementById("month").value;
+            let year = document.getElementById("year").value;
+            let event = document.getElementById("event").value;
+            let venue = document.getElementById("venue").value;
+            
+            let date = `${day}-${month}-${year}`;
+            
+            if (day && month && year && event && venue) {
+                let events = JSON.parse(localStorage.getItem("events")) || [];
+                let newEvent = { date, event, venue };
+                events.push(newEvent);
+                localStorage.setItem("events", JSON.stringify(events));
+                
+                location.reload();
+            }
+        }
+
+        function deleteRow(button, eventName) {
+            let row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            
+            let events = JSON.parse(localStorage.getItem("events")) || [];
+            events = events.filter(event => event.event !== eventName);
+            localStorage.setItem("events", JSON.stringify(events));
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            loginAdmin();
+            loadEvents();
+        });
+    </script>
+</head>
+<body>
+    <header>Admin - Manage Events</header>
+    <div class="container">
+        <h2>Event Management</h2>
+        <div class="form-container">
+            <select id="day">
+                <option value="">Day</option>
+                <script>
+                    for (let i = 1; i <= 31; i++) {
+                        document.write(`<option value="${i}">${i}</option>`);
+                    }
+                </script>
+            </select>
+            <select id="month">
+                <option value="">Month</option>
+                <script>
+                    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    months.forEach((month, index) => {
+                        document.write(`<option value="${month}">${month}</option>`);
+                    });
+                </script>
+            </select>
+            <select id="year">
+                <option value="">Year</option>
+                <script>
+                    let currentYear = new Date().getFullYear();
+                    for (let i = currentYear; i <= currentYear + 10; i++) {
+                        document.write(`<option value="${i}">${i}</option>`);
+                    }
+                </script>
+            </select>
+            <input type="text" id="event" placeholder="Event">
+            <input type="text" id="venue" placeholder="Venue">
+            <button onclick="addEvent()">Add Event</button>
+        </div>
+        <table id="eventsTable">
+            <tr>
+                <th>Date</th>
+                <th>Event</th>
+                <th>Venue</th>
+                <th>Action</th>
+            </tr>
+        </table>
+    </div>
+</body>
+<footer>
+    <a href="NewsAndActivities.html">News And Activities</a>
+</footer>
+</html>
+
+
