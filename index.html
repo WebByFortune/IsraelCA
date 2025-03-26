@@ -471,7 +471,7 @@
             let tillNumber = "123456"; // Replace with your actual Till Number
 
             if (phone && amount) {
-                fetch("https://your-backend-api.com/mpesa/pay", {
+                fetch("http://localhost:3000/mpesa/pa", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ phone, amount, tillNumber })
