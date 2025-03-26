@@ -16,7 +16,7 @@ async function getAccessToken() {
     const auth = Buffer.from(`${MPESA_CONSUMER_KEY}:${MPESA_CONSUMER_SECRET}`).toString("base64");
 
     try {
-        const response = await axios.get("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
+        const response = await axios.get("https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
             headers: { Authorization: `Basic ${auth}` }
         });
         return response.data.access_token;
@@ -53,7 +53,7 @@ app.post("/mpesa/pay", async (req, res) => {
     };
 
     try {
-        const response = await axios.post("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", requestBody, {
+        const response = await axios.post("https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest", requestBody, {
             headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
         });
         res.json(response.data);
